@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Pokemon, PokemonGender } from './models/pokemon';
+import { PokemonService } from './services/pokemon.service';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +9,16 @@ import { Pokemon, PokemonGender } from './models/pokemon';
 })
 export class AppComponent {
   currentPokemonName = '';
-  pokemons: Pokemon[] = [];
+  pokemons: Pokemon[] = this.pokemonService.pokemons;
 
-  addPokemon() {
-    this.pokemons.push({
-      name: this.currentPokemonName,
-      gender: this.getRandomGender(),
-    });
+  constructor(private pokemonService: PokemonService) {}
+
+  onAddPokemonClick() {
+    this.pokemonService.addPokemon(this.currentPokemonName);
+    this.currentPokemonName = '';
   }
 
-  deletePokemon(index: number) {
-    this.pokemons.splice(index, 1);
-  }
-
-  getRandomGender(): PokemonGender {
-    const rand = Math.random();
-    if (rand < 0.3) return 'male';
-    if (rand < 0.6) return 'female';
-    return 'no gender';
+  onDeletePokemonClick(index: number) {
+    this.pokemonService.deletePokemon(index);
   }
 }
