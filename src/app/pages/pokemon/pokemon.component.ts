@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Pokemon } from 'src/app/models/pokemon';
+import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   templateUrl: './pokemon.component.html',
-  styleUrls: ['./pokemon.component.scss']
+  styleUrls: ['./pokemon.component.scss'],
 })
 export class PokemonComponent {
+  pokemon?: Pokemon;
+  pokemonIndex?: number;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private pokemonService: PokemonService
+  ) {
+    const indexStr = this.activatedRoute.snapshot.params['index'];
+    this.pokemonIndex = parseInt(indexStr);
+    this.pokemon = this.pokemonService.pokemons[this.pokemonIndex];
   }
 
-  onGoToPokemonPage() {
-
-    setTimeout(() => {
-      this.router.navigate(['pokemon'], {
-        relativeTo: this.activatedRoute
-      });
-    }, 2000);
-
-
-  }
 }

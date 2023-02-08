@@ -1,12 +1,13 @@
-<button class="btn btn-secondary" routerLink="/">
-  Retour sur la page d'accueil
-</button>
-
-<div>
-  <button class="btn btn-secondary" (click)="onGoToPokemonPage()">
-    Aller sur la page Pokemon
+<div class="container mt-4" *ngIf="pokemon && pokemonIndex !== undefined">
+  <button class="btn btn-secondary" routerLink="/">
+    Retour sur la page d'accueil
   </button>
+
+  <h1 class="mt-4 mb-4">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
+
+
+  <button class="btn btn-primary" [routerLink]="['/pokemon', pokemonIndex + 1]">
+    Pokemon suivant
+  </button>
+
 </div>
-
-
-<p>pokemon works!</p>

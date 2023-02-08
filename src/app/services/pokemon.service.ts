@@ -5,19 +5,34 @@ import { Pokemon, PokemonGender } from '../models/pokemon';
   providedIn: 'root'
 })
 export class PokemonService {
+  static STORAGE_POKEMON_KEY = 'pokemons';
   pokemons: Pokemon[] = [];
 
-  constructor() { }
+  constructor() {
+    this.pokemons = this.getPokemonsFromStorage();
+  }
 
   addPokemon(name: string) {
     this.pokemons.push({
       name,
       gender: this.getRandomGender(),
     });
+    this.storePokemons(this.pokemons);
+  }
+
+  storePokemons(pokemons: Pokemon[]) {
+    localStorage.setItem(PokemonService.STORAGE_POKEMON_KEY, JSON.stringify(pokemons));
+  }
+
+  getPokemonsFromStorage(): Pokemon[] {
+    const pokemonsStr = localStorage.getItem(PokemonService.STORAGE_POKEMON_KEY);
+    if (!pokemonsStr) return [];
+    return JSON.parse(pokemonsStr);
   }
 
   deletePokemon(index: number) {
     this.pokemons.splice(index, 1);
+    this.storePokemons(this.pokemons);
   }
 
   getRandomGender(): PokemonGender {

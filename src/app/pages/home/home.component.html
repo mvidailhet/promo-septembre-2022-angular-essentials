@@ -2,10 +2,6 @@
 
   <h1>Mes pokémons</h1>
 
-  <button class="btn btn-primary" routerLink="pokemon">
-    Aller sur pokemon
-  </button>
-
   <div class="row mb-4">
     <div class="col-9">
       <input type="text" class="form-control" [(ngModel)]="currentPokemonName" placeholder="Bulbizarre" />
@@ -15,6 +11,6 @@
     </div>
   </div>
 
-  <app-pokemon-item *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
+  <app-pokemon-item [routerLink]="['pokemon', index]" *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
 
 </div>

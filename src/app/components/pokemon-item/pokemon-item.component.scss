@@ -1,18 +1,35 @@
+$hover-darken-percent: 10%;
+
 .pokemon-item {
+  &:hover {
+    cursor: pointer;
+  }
 
   &.gender-male {
     background-color: blue;
     color: white;
+
+    &:hover {
+      background-color: darken(blue, $hover-darken-percent);
+    }
   }
 
   &.gender-female {
     background-color: pink;
     color: black;
+
+    &:hover {
+      background-color: darken(pink, $hover-darken-percent);
+    }
   }
 
   &.gender-no-gender {
     background-color: gray;
     color: black;
+
+    &:hover {
+      background-color: darken(gray, $hover-darken-percent);
+    }
   }
 
 }
