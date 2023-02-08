@@ -1,12 +1,16 @@
 <div
   class="row p-3 pokemon-item gender-male"
   *ngIf="pokemon"
-  [ngClass]="{ 'gender-male': pokemon.gender === 'male', 'gender-female': pokemon.gender === 'female', 'gender-no-gender': pokemon.gender === 'no gender' }"
+  [ngClass]="{
+    'gender-male': pokemon.gender === 'male',
+    'gender-female': pokemon.gender === 'female',
+    'gender-no-gender': pokemon.gender === 'no gender'
+  }"
 >
   <div class="col-9">
-    {{ pokemon.name }}
+    {{ pokemon.name }} - {{ pokemon.gender }}
   </div>
   <div class="col-3">
-    {{ pokemon.gender }}
+    <button class="btn-primary btn" (click)="onDeletePokemonClick()">Suprrimer</button>
   </div>
 </div>

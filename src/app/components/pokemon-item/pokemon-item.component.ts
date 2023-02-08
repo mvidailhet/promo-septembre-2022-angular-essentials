@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon';
 
 @Component({
@@ -8,4 +8,9 @@ import { Pokemon } from 'src/app/models/pokemon';
 })
 export class PokemonItemComponent {
   @Input() pokemon?: Pokemon;
+  @Output() onDelete = new EventEmitter();
+
+  onDeletePokemonClick() {
+    this.onDelete.emit();
+  }
 }
