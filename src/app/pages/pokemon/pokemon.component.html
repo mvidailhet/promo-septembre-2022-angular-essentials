@@ -1,12 +1,15 @@
 <div class="container mt-4" *ngIf="pokemon && pokemonIndex !== undefined">
-  <button class="btn btn-secondary" routerLink="/">
+  <button class="btn btn-secondary me-3" routerLink="/">
     Retour sur la page d'accueil
   </button>
+  <button class="btn btn-primary" [routerLink]="['./']" [queryParams]="{ edit: true }">
+    Editer
+  </button>
 
-  <h1 class="mt-4 mb-4">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
+  <h1 class="mt-4 mb-4" [ngClass]="{ editing: isEditing }">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
 
 
-  <button class="btn btn-primary" [routerLink]="['/pokemon', pokemonIndex + 1]">
+  <button class="btn btn-primary" [routerLink]="['./', pokemonIndex + 1]">
     Pokemon suivant
   </button>
 

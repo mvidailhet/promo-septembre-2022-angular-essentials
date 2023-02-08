@@ -10,6 +10,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class PokemonComponent {
   pokemon?: Pokemon;
   pokemonIndex?: number;
+  isEditing = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,6 +24,10 @@ export class PokemonComponent {
       const indexStr = params['index'];
       this.pokemonIndex = parseInt(indexStr);
       this.pokemon = this.pokemonService.pokemons[this.pokemonIndex];
+    });
+
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.isEditing = params['edit'] === 'true';
     });
   }
 
