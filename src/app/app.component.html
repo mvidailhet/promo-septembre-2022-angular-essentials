@@ -1,16 +1,1 @@
-<div class="container mt-4">
-
-  <h1>Mes pokémons</h1>
-
-  <div class="row mb-4">
-    <div class="col-9">
-      <input type="text" class="form-control" [(ngModel)]="currentPokemonName" placeholder="Bulbizarre" />
-    </div>
-    <div class="col-3">
-      <button class="btn btn-primary" (click)="onAddPokemonClick()">Ajouter</button>
-    </div>
-  </div>
-
-  <app-pokemon-item *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
-
-</div>
+<router-outlet></router-outlet>
