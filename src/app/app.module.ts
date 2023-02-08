@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
 import { GeneralComponent } from './pages/pokemon/general/general.component';
 import { DetailsComponent } from './pages/pokemon/details/details.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,15 @@ const routes: Routes = [
         component: DetailsComponent
       }
     ]
-  }
+  },
+  {
+    path: 'not-found',
+    component: PageNotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+  },
 ];
 
 @NgModule({
@@ -44,7 +53,8 @@ const routes: Routes = [
     HomeComponent,
     PokemonComponent,
     GeneralComponent,
-    DetailsComponent
+    DetailsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
