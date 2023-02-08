@@ -18,7 +18,7 @@ export class PokemonComponent {
   isEditing = false;
 
   tabs: PokemonTab[] = [{
-    path: '',
+    path: 'general',
     name: 'Général',
   }, {
     path: 'details',
