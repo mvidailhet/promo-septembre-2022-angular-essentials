@@ -11,8 +11,6 @@
     </div>
   </div>
 
-  <div *ngFor="let pokemon of pokemons">
-    {{ pokemon.name }} - {{ pokemon.gender }}
-  </div>
+  <app-pokemon-item *ngFor="let pokemon of pokemons" [pokemon]="pokemon" />
 
 </div>

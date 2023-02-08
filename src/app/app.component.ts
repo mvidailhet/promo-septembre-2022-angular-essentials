@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-
-type PokemonGender = 'male' | 'female' | 'no gender';
-
-interface Pokemon {
-  name: string;
-  gender: PokemonGender;
-}
+import { Pokemon, PokemonGender } from './models/pokemon';
 
 @Component({
   selector: 'app-root',
