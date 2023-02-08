@@ -1,3 +1,18 @@
+<nav class="header navbar bg-primary">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">Pokemon</span>
+
+    <div>
+      <button *ngIf="!authService.isLoggedIn" class="btn btn-secondary" (click)="login()">
+        Se connecter
+      </button>
+      <button *ngIf="authService.isLoggedIn" class="btn btn-danger" (click)="logout()">
+        Se déconnecter
+      </button>
+    </div>
+  </div>
+</nav>
+
 <div class="container mt-4">
 
   <h1>Mes pokémons</h1>

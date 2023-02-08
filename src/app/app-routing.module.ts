@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { DetailsComponent } from './pages/pokemon/details/details.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'pokemon/:index',
+    canActivate: [AuthGuard],
     component: PokemonComponent,
     children: [
       {
