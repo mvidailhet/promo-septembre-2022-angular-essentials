@@ -7,11 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { PokemonComponent } from './pages/pokemon/pokemon.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'pokemon',
+    component: PokemonComponent
   }
 ];
 
@@ -19,7 +24,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     PokemonItemComponent,
-    HomeComponent
+    HomeComponent,
+    PokemonComponent
   ],
   imports: [
     BrowserModule,
