@@ -1,0 +1,18 @@
+<div class="container mt-4">
+
+  <h1>Mes pokémons</h1>
+
+  <div class="row mb-4">
+    <div class="col-9">
+      <input type="text" class="form-control" [(ngModel)]="currentPokemonName" placeholder="Bulbizarre" />
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="addPokemon()">Ajouter</button>
+    </div>
+  </div>
+
+  <div *ngFor="let pokemon of pokemons">
+    {{ pokemon.name }} - {{ pokemon.gender }}
+  </div>
+
+</div>
