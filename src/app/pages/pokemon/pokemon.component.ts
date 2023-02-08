@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
@@ -15,9 +15,15 @@ export class PokemonComponent {
     private activatedRoute: ActivatedRoute,
     private pokemonService: PokemonService
   ) {
-    const indexStr = this.activatedRoute.snapshot.params['index'];
-    this.pokemonIndex = parseInt(indexStr);
-    this.pokemon = this.pokemonService.pokemons[this.pokemonIndex];
+    this.handlePageParams();
+  }
+
+  handlePageParams() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      const indexStr = params['index'];
+      this.pokemonIndex = parseInt(indexStr);
+      this.pokemon = this.pokemonService.pokemons[this.pokemonIndex];
+    });
   }
 
 }
