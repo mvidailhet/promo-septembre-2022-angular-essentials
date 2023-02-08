@@ -8,6 +8,14 @@
 
   <h1 class="mt-4 mb-4" [ngClass]="{ editing: isEditing }">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
 
+  <ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link" [routerLink]="['./' + tab.path]" routerLinkActive="active">{{ tab.name }}</a>
+    </li>
+  </ul>
+
+  <router-outlet></router-outlet>
+
 
   <button class="btn btn-primary" [routerLink]="['./', pokemonIndex + 1]">
     Pokemon suivant

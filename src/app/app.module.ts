@@ -8,6 +8,8 @@ import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.com
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
+import { GeneralComponent } from './pages/pokemon/general/general.component';
+import { DetailsComponent } from './pages/pokemon/details/details.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,17 @@ const routes: Routes = [
   },
   {
     path: 'pokemon/:index',
-    component: PokemonComponent
+    component: PokemonComponent,
+    children: [
+      {
+        path: '',
+        component: GeneralComponent
+      },
+      {
+        path: 'details',
+        component: DetailsComponent
+      }
+    ]
   }
 ];
 
@@ -25,7 +37,9 @@ const routes: Routes = [
     AppComponent,
     PokemonItemComponent,
     HomeComponent,
-    PokemonComponent
+    PokemonComponent,
+    GeneralComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
