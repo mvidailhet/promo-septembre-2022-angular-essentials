@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pokemon, PokemonGender } from '../models/pokemon';
+import { ApiService } from './api.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -9,17 +10,21 @@ export class PokemonService {
   static STORAGE_POKEMON_KEY = 'pokemons';
   pokemons: Pokemon[] = [];
 
-  constructor(private storageService: StorageService) {
+  constructor(private storageService: StorageService, private apiService: ApiService) {
     this.pokemons = this.getPokemonsFromStorage();
   }
 
   addPokemon(name: string) {
-    this.pokemons.push({
+    const newPokemon: Pokemon = {
       name,
       gender: this.getRandomGender(),
       creationDate: new Date(),
-    });
+    };
+    this.pokemons.push(newPokemon);
     this.storePokemons(this.pokemons);
+    this.apiService.postPokemon(newPokemon).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 
   storePokemons(pokemons: Pokemon[]) {

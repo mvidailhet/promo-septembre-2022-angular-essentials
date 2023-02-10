@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { LoginTemplateDrivenComponent } from './pages/login-template-driven/login-template-driven.component';
 import { LoginModelDrivenComponent } from './pages/login-model-driven/login-model-driven.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
@@ -41,6 +42,7 @@ registerLocaleData(localeFr);
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [
