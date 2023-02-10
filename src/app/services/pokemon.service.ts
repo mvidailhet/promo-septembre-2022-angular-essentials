@@ -23,6 +23,7 @@ export class PokemonService {
       gender: this.getRandomGender(),
       creationDate: new Date(),
     };
+
     this.apiService
       .postPokemon(newLocalPokemon)
       .subscribe((res: PostPokemonResult) => {

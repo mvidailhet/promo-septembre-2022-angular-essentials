@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon';
 import { AuthService } from 'src/app/services/auth.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
@@ -12,15 +13,25 @@ export class HomeComponent {
   currentPokemonName = '';
   currentSearch = '';
   pokemons: Pokemon[] = [];
+  isLoading = false;
 
   constructor(
     private pokemonService: PokemonService,
     public authService: AuthService,
     private router: Router
   ) {
+    this.getPokemons();
+  }
+
+  getPokemons() {
+    this.isLoading = true;
     this.pokemonService.getPokemons()
+    .pipe(
+      delay(2000)
+    )
     .subscribe((pokemons: Pokemon[]) => {
       this.pokemons = pokemons;
+      this.isLoading = false;
     });
   }
 
