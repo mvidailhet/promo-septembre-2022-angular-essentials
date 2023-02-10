@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 import { Pokemon } from 'src/app/models/pokemon';
@@ -29,9 +29,18 @@ export class PokemonComponent implements CanComponentDeactivate {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private router: Router,
   ) {
     this.handlePageParams();
+
+    const currentNavigation = this.router.getCurrentNavigation();
+    const state = currentNavigation?.extras.state;
+
+    if (state && state['pokemon']) {
+      this.pokemon = state['pokemon'];
+    }
+
   }
 
   canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
@@ -43,6 +52,9 @@ export class PokemonComponent implements CanComponentDeactivate {
     this.activatedRoute.params.subscribe((params: Params) => {
       const indexStr = params['index'];
       this.pokemonIndex = parseInt(indexStr);
+
+      if (this.pokemon) return;
+
       this.pokemon = this.pokemonService.pokemons[this.pokemonIndex];
     });
 

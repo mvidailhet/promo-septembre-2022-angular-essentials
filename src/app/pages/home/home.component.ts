@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pokemon } from 'src/app/models/pokemon';
 import { AuthService } from 'src/app/services/auth.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   currentPokemonName = '';
   pokemons: Pokemon[] = this.pokemonService.pokemons;
 
-  constructor(private pokemonService: PokemonService, public authService: AuthService) {}
+  constructor(
+    private pokemonService: PokemonService,
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
     this.authService.login();
@@ -28,5 +33,13 @@ export class HomeComponent {
 
   onDeletePokemonClick(index: number) {
     this.pokemonService.deletePokemon(index);
+  }
+
+  goToPokemonPage(index: number) {
+    this.router.navigate(['pokemon', index], {
+      state: {
+        pokemon: this.pokemons[index],
+      }
+    });
   }
 }

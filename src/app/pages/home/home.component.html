@@ -26,6 +26,6 @@
     </div>
   </div>
 
-  <app-pokemon-item [routerLink]="['pokemon', index]" *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
+  <app-pokemon-item (click)="goToPokemonPage(index)" *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
 
 </div>
