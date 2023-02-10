@@ -4,8 +4,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 import { ErrorComponent } from './pages/error/error.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginModelDrivenComponent } from './pages/login-model-driven/login-model-driven.component';
 import { LoginTemplateDrivenComponent } from './pages/login-template-driven/login-template-driven.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { DetailsComponent } from './pages/pokemon/details/details.component';
 import { GeneralComponent } from './pages/pokemon/general/general.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
@@ -13,9 +13,13 @@ import { PokemonComponent } from './pages/pokemon/pokemon.component';
 const routes: Routes = [
   {
     path: '',
+    component: LoginModelDrivenComponent
+    //component: HomeComponent,
+  },
+  {
+    path: 'login-template-driven-form',
     canDeactivate: [CanDeactivateGuard],
     component: LoginTemplateDrivenComponent
-    //component: HomeComponent,
   },
   {
     path: 'pokemon/:index',

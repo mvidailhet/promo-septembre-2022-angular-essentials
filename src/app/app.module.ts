@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PokemonComponent } from './pages/pokemon/pokemon.component';
@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { LoginTemplateDrivenComponent } from './pages/login-template-driven/login-template-driven.component';
+import { LoginModelDrivenComponent } from './pages/login-model-driven/login-model-driven.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import { LoginTemplateDrivenComponent } from './pages/login-template-driven/logi
     DetailsComponent,
     PageNotFoundComponent,
     ErrorComponent,
-    LoginTemplateDrivenComponent
+    LoginTemplateDrivenComponent,
+    LoginModelDrivenComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
   ],
   providers: [],
