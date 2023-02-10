@@ -16,8 +16,14 @@
       <div class="mb-3">
         <label for="passwordInput"  class="form-label">Password</label>
         <input type="password" formControlName="password" class="form-control" id="passwordInput">
-        <div class="invalid-feedback" *ngIf="password.touched && password.invalid">
-          Le mot de passe ne peut pas être vide
+        <div class="invalid-feedback" *ngIf="password.touched && password.invalid && password.errors">
+          <ng-container *ngIf="password.errors['required']">
+            Le mot de passe ne peut pas être vide
+          </ng-container>
+          <ng-container *ngIf="password.errors['forbidden']">
+            Le mot de passe est trop simple
+          </ng-container>
+
         </div>
       </div>
     </div>

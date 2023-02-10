@@ -8,15 +8,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginModelDrivenComponent {
   loginForm: FormGroup;
+  forbiddenPasswords = ['1234', 'azerty'];
 
   constructor() {
     this.loginForm = new FormGroup({
       userData: new FormGroup({
         email: new FormControl(null, [Validators.required, Validators.email]),
-        password: new FormControl(null, Validators.required),
+        password: new FormControl(null, [Validators.required, this.forbiddenPasswordsValidator.bind(this)]),
       }),
       comment: new FormControl(null),
     });
+  }
+
+  forbiddenPasswordsValidator(control: FormControl): { forbidden: boolean } | null {
+    if (!this.forbiddenPasswords.includes(control.value)) return null;
+    return {
+      forbidden: true
+    };
   }
 
   onSubmit() {
