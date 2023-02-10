@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
@@ -12,7 +14,7 @@ interface PokemonTab {
   templateUrl: './pokemon.component.html',
   styleUrls: ['./pokemon.component.scss'],
 })
-export class PokemonComponent {
+export class PokemonComponent implements CanComponentDeactivate {
   pokemon?: Pokemon;
   pokemonIndex?: number;
   isEditing = false;
@@ -30,6 +32,11 @@ export class PokemonComponent {
     private pokemonService: PokemonService
   ) {
     this.handlePageParams();
+  }
+
+  canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
+    if (!this.isEditing) return true;
+    return confirm('Es-tu certain de vouloir quitter la page sans sauvegarder ?');
   }
 
   handlePageParams() {

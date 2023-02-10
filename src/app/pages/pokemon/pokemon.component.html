@@ -2,11 +2,21 @@
   <button class="btn btn-secondary me-3" routerLink="/">
     Retour sur la page d'accueil
   </button>
-  <button class="btn btn-primary" [routerLink]="['./']" [queryParams]="{ edit: true }">
+  <button *ngIf="!isEditing" class="btn btn-primary" [routerLink]="['./']" [queryParams]="{ edit: true }">
     Editer
   </button>
 
-  <h1 class="mt-4 mb-4" [ngClass]="{ editing: isEditing }">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
+  <div class="row align-items-center">
+    <div class="col-9">
+      <h1 class="mt-4 mb-4" [ngClass]="{ editing: isEditing }">{{ pokemon.name }} - {{ pokemon.gender }}</h1>
+    </div>
+    <div class="col-3">
+      <button *ngIf="isEditing" class="btn btn-primary" [routerLink]="['./']">
+        Valider
+      </button>
+
+    </div>
+  </div>
 
   <ul class="nav nav-tabs">
     <li class="nav-item" *ngFor="let tab of tabs">

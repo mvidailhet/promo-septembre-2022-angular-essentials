@@ -11,6 +11,7 @@ import { GeneralComponent } from './pages/pokemon/general/general.component';
 import { DetailsComponent } from './pages/pokemon/details/details.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     PokemonComponent,
     GeneralComponent,
     DetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

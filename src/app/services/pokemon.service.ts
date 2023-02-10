@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pokemon, PokemonGender } from '../models/pokemon';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class PokemonService {
   static STORAGE_POKEMON_KEY = 'pokemons';
   pokemons: Pokemon[] = [];
 
-  constructor() {
+  constructor(private storageService: StorageService) {
     this.pokemons = this.getPokemonsFromStorage();
   }
 
@@ -21,11 +22,11 @@ export class PokemonService {
   }
 
   storePokemons(pokemons: Pokemon[]) {
-    localStorage.setItem(PokemonService.STORAGE_POKEMON_KEY, JSON.stringify(pokemons));
+    this.storageService.storeItem(PokemonService.STORAGE_POKEMON_KEY, JSON.stringify(pokemons));
   }
 
   getPokemonsFromStorage(): Pokemon[] {
-    const pokemonsStr = localStorage.getItem(PokemonService.STORAGE_POKEMON_KEY);
+    const pokemonsStr = this.storageService.getItem(PokemonService.STORAGE_POKEMON_KEY);
     if (!pokemonsStr) return [];
     return JSON.parse(pokemonsStr);
   }
