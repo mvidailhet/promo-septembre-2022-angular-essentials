@@ -18,6 +18,7 @@ import { LoginModelDrivenComponent } from './pages/login-model-driven/login-mode
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { ShortenPipe } from './pipes/shorten.pipe';
+import { SearchPokemonPipe } from './pipes/search-pokemon.pipe';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -32,7 +33,8 @@ registerLocaleData(localeFr);
     ErrorComponent,
     LoginTemplateDrivenComponent,
     LoginModelDrivenComponent,
-    ShortenPipe
+    ShortenPipe,
+    SearchPokemonPipe
   ],
   imports: [
     BrowserModule,

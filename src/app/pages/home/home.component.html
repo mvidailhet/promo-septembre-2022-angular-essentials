@@ -26,6 +26,10 @@
     </div>
   </div>
 
-  <app-pokemon-item (click)="goToPokemonPage(index)" *ngFor="let pokemon of pokemons; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
+  <div class="mb-4">
+    <input type="text" class="form-control" [(ngModel)]="currentSearch" placeholder="Rechercher un pokemon" />
+  </div>
+
+  <app-pokemon-item (click)="goToPokemonPage(index)" *ngFor="let pokemon of pokemons | searchPokemon:currentSearch; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />
 
 </div>

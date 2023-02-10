@@ -10,6 +10,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 })
 export class HomeComponent {
   currentPokemonName = '';
+  currentSearch = '';
   pokemons: Pokemon[] = this.pokemonService.pokemons;
 
   constructor(
