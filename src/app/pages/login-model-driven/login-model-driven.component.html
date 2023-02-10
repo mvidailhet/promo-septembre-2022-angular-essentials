@@ -11,6 +11,9 @@
           <ng-container *ngIf="email.errors['email']">
             L'email n'est pas valide
           </ng-container>
+          <ng-container *ngIf="email.errors['forbidden']">
+            L'email est interdit
+          </ng-container>
         </div>
       </div>
       <div class="mb-3">
