@@ -13,6 +13,7 @@ import { PokemonComponent } from './pages/pokemon/pokemon.component';
 const routes: Routes = [
   {
     path: '',
+    canDeactivate: [CanDeactivateGuard],
     component: LoginTemplateDrivenComponent
     //component: HomeComponent,
   },
