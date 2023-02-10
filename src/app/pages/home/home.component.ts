@@ -11,13 +11,18 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class HomeComponent {
   currentPokemonName = '';
   currentSearch = '';
-  pokemons: Pokemon[] = this.pokemonService.pokemons;
+  pokemons: Pokemon[] = [];
 
   constructor(
     private pokemonService: PokemonService,
     public authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.pokemonService.getPokemons()
+    .subscribe((pokemons: Pokemon[]) => {
+      this.pokemons = pokemons;
+    });
+  }
 
   login() {
     this.authService.login();

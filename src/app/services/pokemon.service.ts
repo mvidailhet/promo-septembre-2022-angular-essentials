@@ -1,45 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Pokemon, PokemonGender } from '../models/pokemon';
-import { ApiService } from './api.service';
+import { map, tap } from 'rxjs';
+import { LocalPokemon, Pokemon, PokemonGender } from '../models/pokemon';
+import {
+  ApiService,
+  GetPokemonsResult,
+  PostPokemonResult,
+} from './api.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokemonService {
   static STORAGE_POKEMON_KEY = 'pokemons';
   pokemons: Pokemon[] = [];
 
-  constructor(private storageService: StorageService, private apiService: ApiService) {
-    this.pokemons = this.getPokemonsFromStorage();
-  }
+  constructor(private apiService: ApiService) {}
 
   addPokemon(name: string) {
-    const newPokemon: Pokemon = {
+    const newLocalPokemon: LocalPokemon = {
       name,
       gender: this.getRandomGender(),
       creationDate: new Date(),
     };
-    this.pokemons.push(newPokemon);
-    this.storePokemons(this.pokemons);
-    this.apiService.postPokemon(newPokemon).subscribe((res: any) => {
-      console.log(res);
-    });
+    this.apiService
+      .postPokemon(newLocalPokemon)
+      .subscribe((res: PostPokemonResult) => {
+        const newPokemon: Pokemon = {
+          ...newLocalPokemon,
+          id: res.name,
+        };
+        this.pokemons.push(newPokemon);
+      });
   }
 
-  storePokemons(pokemons: Pokemon[]) {
-    this.storageService.storeItem(PokemonService.STORAGE_POKEMON_KEY, JSON.stringify(pokemons));
-  }
-
-  getPokemonsFromStorage(): Pokemon[] {
-    const pokemonsStr = this.storageService.getItem(PokemonService.STORAGE_POKEMON_KEY);
-    if (!pokemonsStr) return [];
-    return JSON.parse(pokemonsStr);
+  getPokemons() {
+    return this.apiService.getPokemons()
+    .pipe(
+      map((res: GetPokemonsResult) => {
+        const pokemons: Pokemon[] = [];
+        Object.entries(res).forEach(([id, pokemon]) => {
+          pokemons.push({
+            ...pokemon,
+            id,
+          });
+        });
+        return pokemons;
+      }),
+      tap((pokemons: Pokemon[]) => {
+        this.pokemons = pokemons;
+      })
+    );
   }
 
   deletePokemon(index: number) {
     this.pokemons.splice(index, 1);
-    this.storePokemons(this.pokemons);
   }
 
   getRandomGender(): PokemonGender {

@@ -40,7 +40,6 @@ export class PokemonComponent implements CanComponentDeactivate {
     if (state && state['pokemon']) {
       this.pokemon = state['pokemon'];
     }
-
   }
 
   canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
