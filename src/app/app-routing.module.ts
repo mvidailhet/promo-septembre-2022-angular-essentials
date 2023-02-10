@@ -13,13 +13,16 @@ import { PokemonComponent } from './pages/pokemon/pokemon.component';
 const routes: Routes = [
   {
     path: '',
-    component: LoginModelDrivenComponent
-    //component: HomeComponent,
+    component: HomeComponent,
   },
   {
     path: 'login-template-driven-form',
     canDeactivate: [CanDeactivateGuard],
     component: LoginTemplateDrivenComponent
+  },
+  {
+    path: 'login-model-driven-form',
+    component: LoginModelDrivenComponent
   },
   {
     path: 'pokemon/:index',

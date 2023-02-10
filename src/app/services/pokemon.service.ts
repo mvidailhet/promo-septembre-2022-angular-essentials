@@ -17,6 +17,7 @@ export class PokemonService {
     this.pokemons.push({
       name,
       gender: this.getRandomGender(),
+      creationDate: new Date(),
     });
     this.storePokemons(this.pokemons);
   }

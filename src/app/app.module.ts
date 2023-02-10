@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './pages/error/error.component';
 import { LoginTemplateDrivenComponent } from './pages/login-template-driven/login-template-driven.component';
 import { LoginModelDrivenComponent } from './pages/login-model-driven/login-model-driven.component';
+
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { LoginModelDrivenComponent } from './pages/login-model-driven/login-mode
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
