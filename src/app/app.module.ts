@@ -12,6 +12,7 @@ import { DetailsComponent } from './pages/pokemon/details/details.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './pages/error/error.component';
+import { LoginTemplateDrivenComponent } from './pages/login-template-driven/login-template-driven.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ErrorComponent } from './pages/error/error.component';
     GeneralComponent,
     DetailsComponent,
     PageNotFoundComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoginTemplateDrivenComponent
   ],
   imports: [
     BrowserModule,
