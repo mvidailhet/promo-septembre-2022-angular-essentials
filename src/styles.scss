@@ -2,3 +2,10 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+.list-centerer {
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

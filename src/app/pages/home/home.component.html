@@ -30,9 +30,15 @@
     <input type="text" class="form-control" [(ngModel)]="currentSearch" placeholder="Rechercher un pokemon" />
   </div>
 
-  <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
-    <span class="visually-hidden">Loading...</span>
+  <div class="list-centerer">
+    <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div *ngIf="!isLoading && pokemons.length === 0">
+      Aucun pokemon
+    </div>
   </div>
+
 
   <ng-container *ngIf="!isLoading">
     <app-pokemon-item (click)="goToPokemonPage(index)" *ngFor="let pokemon of pokemons | searchPokemon:currentSearch; let index = index" [pokemon]="pokemon" (onDelete)="onDeletePokemonClick(index)" />

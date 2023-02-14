@@ -6,7 +6,6 @@ import {
   GetPokemonsResult,
   PostPokemonResult,
 } from './api.service';
-import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +39,7 @@ export class PokemonService {
     .pipe(
       map((res: GetPokemonsResult) => {
         const pokemons: Pokemon[] = [];
+        if (!res) return [];
         Object.entries(res).forEach(([id, pokemon]) => {
           pokemons.push({
             ...pokemon,
