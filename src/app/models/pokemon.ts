@@ -1,4 +1,10 @@
-export type PokemonGender = 'male' | 'female' | 'no gender';
+export const POKEMON_GENDER = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  NO_GENDER: 'NO_GENDER',
+} as const;
+
+export type PokemonGender = keyof typeof POKEMON_GENDER;
 
 export interface LocalPokemon {
   name: string;

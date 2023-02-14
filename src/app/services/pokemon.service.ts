@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
-import { LocalPokemon, Pokemon, PokemonGender } from '../models/pokemon';
+import { LocalPokemon, Pokemon, PokemonGender, POKEMON_GENDER } from '../models/pokemon';
 import {
   ApiService,
   GetPokemonsResult,
@@ -60,8 +60,13 @@ export class PokemonService {
 
   getRandomGender(): PokemonGender {
     const rand = Math.random();
-    if (rand < 0.3) return 'male';
-    if (rand < 0.6) return 'female';
-    return 'no gender';
+    const pokemonGenderKeys = Object.keys(POKEMON_GENDER) as PokemonGender[];
+    const range = 1 / pokemonGenderKeys.length;
+
+    for (let i = 0; i < pokemonGenderKeys.length; i++) {
+      const key = pokemonGenderKeys[i];
+      if (rand < range * (i + 1)) return POKEMON_GENDER[key];
+    }
+    return 'NO_GENDER';
   }
 }

@@ -2,9 +2,9 @@
   class="row p-3 pokemon-item gender-male align-items-center"
   *ngIf="pokemon"
   [ngClass]="{
-    'gender-male': pokemon.gender === 'male',
-    'gender-female': pokemon.gender === 'female',
-    'gender-no-gender': pokemon.gender === 'no gender'
+    'gender-male': pokemon.gender === 'MALE',
+    'gender-female': pokemon.gender === 'FEMALE',
+    'gender-no-gender': pokemon.gender === 'NO_GENDER'
   }"
 >
   <div class="col-9">
