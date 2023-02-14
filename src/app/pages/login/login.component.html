@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="emailInput" class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="emailInput" placeholder="michel@gmail.com">
+      <div class="invalid-feedback" *ngIf="email.touched && email.invalid && email.errors">
+        <ng-container *ngIf="email.errors['required']">
+          L'email ne peut pas être vide
+        </ng-container>
+        <ng-container *ngIf="email.errors['email']">
+          L'email n'est pas valide
+        </ng-container>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="passwordInput"  class="form-label">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="passwordInput">
+      <div class="invalid-feedback" *ngIf="password.touched && password.invalid && password.errors">
+        <ng-container *ngIf="password.errors['required']">
+          Le mot de passe ne peut pas être vide
+        </ng-container>
+      </div>
+    </div>
+    <div class="text-center">
+
+      <div class="invalid-feedback mb-2" *ngIf="loginError">
+        Erreur de connexion
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Se connecter
+      </button>
+    </div>
+  </form>
+</div>

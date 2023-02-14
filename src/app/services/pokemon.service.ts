@@ -4,7 +4,7 @@ import { LocalPokemon, Pokemon, PokemonGender, POKEMON_GENDER } from '../models/
 import {
   ApiService,
   GetPokemonsResult,
-  PostPokemonResult,
+  PostResult,
 } from './api.service';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class PokemonService {
 
     this.apiService
       .postPokemon(newLocalPokemon)
-      .subscribe((res: PostPokemonResult) => {
+      .subscribe((res: PostResult) => {
         const newPokemon: Pokemon = {
           ...newLocalPokemon,
           id: res.name,

@@ -1,13 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocalPokemon, Pokemon } from '../models/pokemon';
+import { LocalPokemon } from '../models/pokemon';
+import { LocalUser } from '../models/user';
 
-export interface PostPokemonResult {
+export interface PostResult {
   name: string;
 }
 
 export interface GetPokemonsResult {
   id: LocalPokemon;
+}
+
+export interface GetUsersResult {
+  id: LocalUser;
 }
 
 @Injectable({
@@ -19,10 +24,18 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   postPokemon(pokemon: LocalPokemon) {
-    return this.http.post<PostPokemonResult>(`${this.apiUrl}/pokemons.json`, pokemon);
+    return this.http.post<PostResult>(`${this.apiUrl}/pokemons.json`, pokemon);
   }
 
   getPokemons() {
     return this.http.get<GetPokemonsResult>(`${this.apiUrl}/pokemons.json`);
+  }
+
+  postUser(user: LocalUser) {
+    return this.http.post<PostResult>(`${this.apiUrl}/users.json`, user);
+  }
+
+  getUsers() {
+    return this.http.get<GetUsersResult>(`${this.apiUrl}/users.json`);
   }
 }

@@ -3,10 +3,7 @@
     <span class="navbar-brand mb-0 h1">Pokemon</span>
 
     <div>
-      <button *ngIf="!authService.isLoggedIn" class="btn btn-secondary" (click)="login()">
-        Se connecter
-      </button>
-      <button *ngIf="authService.isLoggedIn" class="btn btn-danger" (click)="logout()">
+      <button class="btn btn-danger" (click)="logout()">
         Se déconnecter
       </button>
     </div>
@@ -30,7 +27,7 @@
     <input type="text" class="form-control" [(ngModel)]="currentSearch" placeholder="Rechercher un pokemon" />
   </div>
 
-  <div class="list-centerer">
+  <div class="list-centerer" *ngIf="isLoading || pokemons.length === 0">
     <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
       <span class="visually-hidden">Loading...</span>
     </div>

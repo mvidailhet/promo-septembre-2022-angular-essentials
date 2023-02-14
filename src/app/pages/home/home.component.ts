@@ -18,7 +18,7 @@ export class HomeComponent {
   constructor(
     private pokemonService: PokemonService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
     this.getPokemons();
   }
@@ -35,12 +35,9 @@ export class HomeComponent {
     });
   }
 
-  login() {
-    this.authService.login();
-  }
-
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   onAddPokemonClick() {

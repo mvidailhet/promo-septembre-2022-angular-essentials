@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { lastValueFrom, map } from 'rxjs';
+import { User } from '../models/user';
+import { ApiService, GetUsersResult } from './api.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -12,7 +15,7 @@ export class AuthService {
     return this._isLoggedIn;
   }
 
-  constructor(private storageService: StorageService) {
+  constructor(private storageService: StorageService, private apiService: ApiService) {
     this.loadIsLoggedInFromStorage();
   }
 
@@ -21,9 +24,33 @@ export class AuthService {
     this._isLoggedIn = isLoggedInStr ? JSON.parse(isLoggedInStr) : false;
   }
 
-  login() {
+  async login(email: string, password: string) {
+    const users = await lastValueFrom(this.getUsers());
+
+    const foundUserIndex = users.findIndex((user) => user.email === email && user.password === password);
+
+    if (foundUserIndex === -1) return Promise.reject('User not found');
+
     this._isLoggedIn = true;
     this.storeIsLoggedIn();
+    return Promise.resolve();
+  }
+
+  private getUsers() {
+    return this.apiService.getUsers()
+    .pipe(
+      map((res: GetUsersResult) => {
+        const users: User[] = [];
+        if (!res) return [];
+        Object.entries(res).forEach(([id, user]) => {
+          users.push({
+            ...user,
+            id,
+          });
+        });
+        return users;
+      })
+    );
   }
 
   logout() {
@@ -39,7 +66,7 @@ export class AuthService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(this._isLoggedIn);
-      }, 1000);
+      }, 0);
     });
   }
 }
